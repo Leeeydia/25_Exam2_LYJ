@@ -8,21 +8,21 @@ import java.util.List;
 
 public class MotivationController {
 
-    int lastId =0;
+    int lastId = 0;
     List<Motivation> motivations = new ArrayList<Motivation>();
 
-    public void add(){
-        int id = lastId+1;
+    public void add() {
+        int id = lastId + 1;
         System.out.print("작가:");
         String body = Container.getSc().nextLine().trim();
 
         System.out.print("명언:");
         String source = Container.getSc().nextLine().trim();
 
-        Motivation motivation = new Motivation(id,body,source);
+        Motivation motivation = new Motivation(id, body, source);
         motivations.add(motivation);
 
-        System.out.printf("%d번 명언이 등록되었습니다.\n",id);
+        System.out.printf("%d번 명언이 등록되었습니다.\n", id);
         lastId++;
     }
 
@@ -54,14 +54,13 @@ public class MotivationController {
         Motivation foundMotivation = findById(id);
 
         if (foundMotivation == null) {
-            System.out.println(id +" 번 명언은 존재하지 않습니다.");
+            System.out.println(id + " 번 명언은 존재하지 않습니다.");
             return;
         }
 
         motivations.remove(foundMotivation);
         System.out.println(id + "번 명언이 삭제되었습니다.");
     }
-
 
 
     public void edit(String cmd) {
@@ -111,6 +110,29 @@ public class MotivationController {
 
         System.out.println(id + "번 명언이 수정되었습니다");
     }
+
+    public void detail(String cmd) {
+        String[] cmdBits = cmd.split(" ");
+        int id = Integer.parseInt(cmdBits[1]);
+
+        if (cmdBits.length == 1) {
+            System.out.println("명령어를 확인해주세요");
+            return;
+        }
+
+        Motivation foundMotivation = findById(id);
+
+        if (foundMotivation == null) {
+            System.out.println("해당 명언은 존재하지 않습니다");
+            return;
+        }
+        System.out.println("===== 상세보기 =====");
+        System.out.println("번호 :" + foundMotivation.getId());
+        System.out.println("작가 : " + foundMotivation.getBody());
+        System.out.println("명언 : " + foundMotivation.getSource());
+
+    }
+
 
     private Motivation findById(int id) {
         for (Motivation motivation : motivations) {

@@ -31,7 +31,9 @@ public class App {
                 motivationController.del(cmd);
             } else if (cmd.startsWith("수정")) {
                 motivationController.edit(cmd);
-            } else {
+            } else if(cmd.startsWith("상세")){
+                motivationController.detail(cmd);
+            }else {
                 System.out.println("사용할 수 없는 명령어입니다");
             }
 
